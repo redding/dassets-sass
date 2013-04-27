@@ -5,7 +5,7 @@ require "dassets-sass/version"
 
 Gem::Specification.new do |gem|
   gem.name        = "dassets-sass"
-  gem.version     = DassetsSass::VERSION
+  gem.version     = Dassets::Sass::VERSION
   gem.authors     = ["Kelly Redding", "Collin Redding"]
   gem.email       = ["kelly@kellyredding.com", "collin.redding@me.com"]
   gem.description = %q{Dassets engine for compiling Sass}
@@ -18,6 +18,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_development_dependency("assert")
-  # TODO: gem.add_dependency("gem-name", ["~> 0.0"])
+
+  gem.add_dependency("sass")
+  gem.add_dependency("dassets")
 
 end

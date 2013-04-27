@@ -7,4 +7,12 @@ $LOAD_PATH.unshift(File.expand_path("../..", __FILE__))
 # require pry for debugging (`binding.pry`)
 require 'pry'
 
-# TODO: put test helpers here...
+ENV['DASSETS_TEST_MODE']   = 'yes'
+ENV['DASSETS_ASSETS_FILE'] = 'test/support/config/assets'
+require 'dassets'
+Dassets.init
+
+require 'test/support/factory'
+class Assert::Context
+  setup{ @factory = Dassets::Sass::Factory }
+end

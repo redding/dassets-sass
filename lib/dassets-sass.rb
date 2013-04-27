@@ -1,5 +1,11 @@
+require 'sass'
+require 'dassets/engine'
 require "dassets-sass/version"
 
-module DassetsSass
-  # TODO: your code goes here...
+module Dassets::Sass
+
+  class Engine < Dassets::Engine
+
+  end
+
 end

@@ -1,0 +1,8 @@
+@nice_blue: #5B83AD;
+@light_blue: @nice_blue + #111;
+#header {
+  color: @light_blue;
+}
+div {
+  width: 1 + 1;
+}
