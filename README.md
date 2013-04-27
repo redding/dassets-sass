@@ -1,6 +1,6 @@
 # DassetsSass
 
-TODO: Write a gem description
+Dassets [engine](https://github.com/redding/dassets#compiling) for compiling [Sass](http://sass-lang.com/) css sources.
 
 ## Usage
 
