@@ -19,7 +19,10 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency("assert")
 
-  gem.add_dependency("sass")
+  # lock in to Sass 3.1 and up b/c this is earliest version implementing
+  # the expected `Sass.compile` api:
+  # https://github.com/nex3/sass/commit/332dd6945a8acd660719e0ea4eb48ae3a3ef9b38
+  gem.add_dependency("sass", ["~> 3.1"])
   gem.add_dependency("dassets")
 
 end

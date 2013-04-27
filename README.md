@@ -4,7 +4,26 @@ Dassets [engine](https://github.com/redding/dassets#compiling) for compiling [Sa
 
 ## Usage
 
-TODO: Write code samples and usage instructions here
+Register the engine:
+
+```ruby
+# in config/assets.rb
+require 'dassets'
+require 'dassets-sass'
+
+Dassets.configure do |c|
+  c.root_path '/some/root/path'
+
+  # register for `scss` syntax
+  c.engine 'scss', Dassets::Sass::Engine, :syntax => 'scss'
+
+  # register for `sass` syntax
+  c.engine 'sass', Dassets::Sass::Engine, :syntax => 'sass'
+
+end
+```
+
+Put your `.scss` and `.sass` source files in your source path and digest them.  Dassets will compile their content using Sass, switch their extension to `.css`, and write the output to the output path.
 
 ## Installation
 
