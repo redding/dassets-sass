@@ -11,13 +11,14 @@ Gem::Specification.new do |gem|
   gem.description = %q{Dassets engine for compiling Sass}
   gem.summary     = %q{Dassets engine for compiling Sass}
   gem.homepage    = "http://github.com/redding/dassets-sass"
+  gem.license     = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_development_dependency("assert")
+  gem.add_development_dependency("assert", ["~> 2.10"])
 
   # lock in to Sass 3.1 and up b/c this is earliest version implementing
   # the expected `Sass.compile` api:

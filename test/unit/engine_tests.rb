@@ -1,11 +1,12 @@
 require 'assert'
-require 'dassets/engine'
 require 'dassets-sass'
+
+require 'dassets/engine'
 
 class Dassets::Sass::Engine
 
-  class BaseTests < Assert::Context
-    desc "the Dassets::Sass engine"
+  class UnitTests < Assert::Context
+    desc "Dassets::Sass::Engine"
     setup do
       @engine = Dassets::Sass::Engine.new
     end
