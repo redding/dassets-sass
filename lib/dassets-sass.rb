@@ -10,12 +10,20 @@ module Dassets::Sass
       (self.opts[:syntax] || self.opts['syntax'] || 'scss').to_s
     end
 
+    def load_paths
+      @load_paths ||= ([self.opts['source_path']] +
+                       [*(self.opts[:load_paths] || self.opts['load_paths'] || [])])
+    end
+
     def ext(input_ext)
       'css'
     end
 
     def compile(input_content)
-      ::Sass.compile(input_content, :syntax => self.syntax.to_sym)
+      ::Sass.compile(input_content, {
+        :syntax => self.syntax.to_sym,
+        :load_paths => self.load_paths
+      })
     end
 
   end
