@@ -19,6 +19,13 @@ Dassets.configure do |c|
 
     # register for `sass` syntax
     s.engine 'sass', Dassets::Sass::Engine, :syntax => 'sass'
+
+    # by default `/path/to/assets` is in the load paths, but
+    # you can specify additional custom load paths to use with `@import`s
+    s.engine 'scss', Dassets::Sass::Engine, {
+      :syntax => 'scss',
+      :load_paths => ['/custom/load/path']
+    }
   end
 
 end
