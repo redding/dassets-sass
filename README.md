@@ -20,10 +20,17 @@ Dassets.configure do |c|
     # register for `sass` syntax
     s.engine 'sass', Dassets::Sass::Engine, :syntax => 'sass'
 
+    # by default `:nested` output style is used, but you can
+    # specify a custom style (http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style)
+    s.engine 'scss', Dassets::Sass::Engine, {
+      ...
+      :output_style => :compressed
+    }
+
     # by default `/path/to/assets` is in the load paths, but
     # you can specify additional custom load paths to use with `@import`s
     s.engine 'scss', Dassets::Sass::Engine, {
-      :syntax => 'scss',
+      ...
       :load_paths => ['/custom/load/path']
     }
   end

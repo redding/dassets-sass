@@ -14,7 +14,7 @@ class Dassets::Sass::Engine
     end
     subject{ @engine }
 
-    should have_imeths :syntax, :load_paths
+    should have_imeths :syntax, :output_style, :load_paths
 
     should "be a Dassets engine" do
       assert_kind_of Dassets::Engine, subject
@@ -23,11 +23,21 @@ class Dassets::Sass::Engine
     end
 
     should "default the syntax to `scss`" do
-      assert_equal 'scss', Dassets::Sass::Engine.new.syntax
+      assert_equal 'scss', subject.syntax
     end
 
-    should "allow specifying the engine syntax using engine opts" do
-      assert_equal 'sass', Dassets::Sass::Engine.new(:syntax => 'sass').syntax
+    should "allow specifying a custom syntax value" do
+      engine = Dassets::Sass::Engine.new(:syntax => 'sass')
+      assert_equal 'sass', engine.syntax
+    end
+
+    should "default the output style to `nested`" do
+      assert_equal 'nested', subject.output_style
+    end
+
+    should "allow specifying a custom output style value" do
+      engine = Dassets::Sass::Engine.new(:output_style => 'compressed')
+      assert_equal 'compressed', engine.output_style
     end
 
     should "default the load paths to be just the source path" do
@@ -56,18 +66,21 @@ class Dassets::Sass::Engine
       assert_equal 'css', subject.ext('whatever')
     end
 
-    should "use its syntax and load paths when compiling" do
+    should "use its syntax, output style and load paths when compiling" do
       compiled_with_options = false
       input = @factory.sass
       syntax = :sass
+      output_style = :compressed
       sass_engine = Dassets::Sass::Engine.new({
         :syntax => syntax,
+        :output_style => output_style,
         :load_paths => [@lp1]
       })
       load_paths = sass_engine.load_paths
 
       Assert.stub(::Sass, :compile).with(input, {
         :syntax => syntax,
+        :style => output_style,
         :load_paths => load_paths
       }){ compiled_with_options = true }
 
