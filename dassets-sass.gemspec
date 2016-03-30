@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version     = Dassets::Sass::VERSION
   gem.authors     = ["Kelly Redding", "Collin Redding"]
   gem.email       = ["kelly@kellyredding.com", "collin.redding@me.com"]
-  gem.description = %q{Dassets engine for compiling Sass}
   gem.summary     = %q{Dassets engine for compiling Sass}
+  gem.description = %q{Dassets engine for compiling Sass}
   gem.homepage    = "http://github.com/redding/dassets-sass"
   gem.license     = 'MIT'
 
@@ -18,12 +18,12 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_development_dependency("assert", ["~> 2.12"])
+  gem.add_development_dependency("assert", ["~> 2.15.1"])
 
   # lock in to Sass 3.1 and up b/c this is earliest version implementing
   # the expected `Sass.compile` api:
   # https://github.com/nex3/sass/commit/332dd6945a8acd660719e0ea4eb48ae3a3ef9b38
-  gem.add_dependency("sass", ["~> 3.1"])
-  gem.add_dependency("dassets")
+  gem.add_dependency("sass",    ["~> 3.1"])
+  gem.add_dependency("dassets", ["~> 0.13.2"])
 
 end
