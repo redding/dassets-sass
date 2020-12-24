@@ -1,6 +1,6 @@
 # Dassets::Sass
 
-Dassets [engine](https://github.com/redding/dassets#compiling) for compiling [Sass](http://sass-lang.com/) css sources.
+Dassets [engine](https://github.com/redding/dassets#compiling) for compiling [Sass](http://sass-lang.com/) css sources using [libsass](https://github.com/sass/sassc-ruby).
 
 ## Usage
 
@@ -8,43 +8,41 @@ Register the engine:
 
 ```ruby
 # in config/assets.rb
-require 'dassets'
-require 'dassets-sass'
+require "dassets"
+require "dassets-sass"
 
 Dassets.configure do |c|
-
   c.source "/path/to/assets") do |s|
     # register for `scss` syntax
-    s.engine 'scss', Dassets::Sass::Engine, :syntax => 'scss'
+    s.engine "scss", Dassets::Sass::Engine, syntax: Dassets::Sass::SCSS
 
     # register for `sass` syntax
-    s.engine 'sass', Dassets::Sass::Engine, :syntax => 'sass'
+    s.engine "sass", Dassets::Sass::Engine, syntax: Dassets::Sass::SASS
 
-    # by default `:nested` output style is used, but you can
+    # by default Dassets::Sass::NESTED output style is used, but you can
     # specify a custom style (http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style)
-    s.engine 'scss', Dassets::Sass::Engine, {
+    s.engine "scss", Dassets::Sass::Engine, {
       ...
-      :output_style => :compressed
+      output_style: Dassets::Sass::COMPRESSED
     }
 
-    # by default `/path/to/assets` is in the load paths, but
+    # by default `/path/to/assets` is in the load path, but
     # you can specify additional custom load paths to use with `@import`s
-    s.engine 'scss', Dassets::Sass::Engine, {
+    s.engine "scss", Dassets::Sass::Engine, {
       ...
-      :load_paths => ['/custom/load/path']
+      load_paths: ["/custom/load/path"]
     }
   end
-
 end
 ```
 
-Put your `.scss` and `.sass` source files in your source path.  Dassets will compile their content using Sass, switch their extension to `.css`, and write the output to the output path.
+Put your `.scss` and `.sass` source files in your source path. Dassets will compile their content using Sass, switch their extension to `.css`, and write the output to the output path.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'dassets-sass'
+    gem "dassets-sass"
 
 And then execute:
 
