@@ -1,6 +1,6 @@
 # Dassets::Sass
 
-Dassets [engine](https://github.com/redding/dassets#compiling) for compiling [Sass](http://sass-lang.com/) css sources using [libsass](https://github.com/sass/sassc-ruby).
+Dassets [engine](https://github.com/redding/dassets#compiling) to compile dynamic asset filtes written with [SASS/SCSS](http://sass-lang.com/) using [libsass](https://github.com/sass/sassc-ruby).
 
 ## Usage
 

@@ -4,26 +4,33 @@ require "dassets-sass"
 require "dassets/engine"
 require "sassc"
 
-class Dassets::Sass::Engine
+module Dassets::Sass
   class UnitTests < Assert::Context
-    desc "Dassets::Sass::Engine"
+    desc "Dassets::Sass"
     subject { unit_class }
 
-    let(:unit_class) { Dassets::Sass::Engine }
+    let(:unit_class) { Dassets::Sass }
 
     should "know its CONSTANTS" do
-      assert_that(Dassets::Sass.SASS).equals("sass")
-      assert_that(Dassets::Sass.SCSS).equals("scss")
-      assert_that(Dassets::Sass.NESTED).equals("nested")
-      assert_that(Dassets::Sass.EXPANDED).equals("expanded")
-      assert_that(Dassets::Sass.COMPACT).equals("compact")
-      assert_that(Dassets::Sass.COMPRESSED).equals("compressed")
+      assert_that(unit_class.SASS).equals("sass")
+      assert_that(unit_class.SCSS).equals("scss")
+      assert_that(unit_class.NESTED).equals("nested")
+      assert_that(unit_class.EXPANDED).equals("expanded")
+      assert_that(unit_class.COMPACT).equals("compact")
+      assert_that(unit_class.COMPRESSED).equals("compressed")
     end
   end
 
-  class InitTests < UnitTests
+  class EngineTests < UnitTests
+    desc "Engine"
+    subject { engine_class }
+
+    let(:engine_class) { unit_class::Engine }
+  end
+
+  class EngineInitTests < EngineTests
     desc "when init"
-    subject { unit_class.new }
+    subject { engine_class.new }
 
     setup do
       @lp1 = "/a-load-path-1"
@@ -46,7 +53,7 @@ class Dassets::Sass::Engine
 
     should "allow specifying a custom settings" do
       engine =
-        Dassets::Sass::Engine.new(
+        engine_class.new(
           syntax:       Dassets::Sass.SASS,
           output_style: Dassets::Sass.COMPRESSED,
         )
@@ -55,15 +62,15 @@ class Dassets::Sass::Engine
     end
 
     should "allow specifying custom load paths, always including the source path" do
-      engine = Dassets::Sass::Engine.new(load_paths: @lp1)
+      engine = engine_class.new(load_paths: @lp1)
       assert_that(engine.load_paths).includes(@lp1)
       assert_that(engine.load_paths).includes(subject.opts["source_path"])
 
-      engine = Dassets::Sass::Engine.new("load_paths" => [@lp1])
+      engine = engine_class.new("load_paths" => [@lp1])
       assert_that(engine.load_paths).includes(@lp1)
       assert_that(engine.load_paths).includes(subject.opts["source_path"])
 
-      engine = Dassets::Sass::Engine.new("load_paths" => [@lp1, @lp2])
+      engine = engine_class.new("load_paths" => [@lp1, @lp2])
       assert_that(engine.load_paths).includes(@lp1)
       assert_that(engine.load_paths).includes(@lp2)
       assert_that(engine.load_paths).includes(subject.opts["source_path"])
@@ -79,7 +86,7 @@ class Dassets::Sass::Engine
     should "use its syntax, output style and load paths when compiling" do
       load_paths = [@lp1]
       sass_engine =
-        Dassets::Sass::Engine.new(
+        engine_class.new(
           syntax:       Dassets::Sass.SASS,
           output_style: Dassets::Sass.COMPRESSED,
           load_paths:   load_paths,
@@ -104,7 +111,7 @@ class Dassets::Sass::Engine
     should "compile any input content as Sass CSS" do
       assert_equal @factory.scss_compiled, subject.compile(@factory.scss)
 
-      sass_engine = Dassets::Sass::Engine.new(syntax: Dassets::Sass.SASS)
+      sass_engine = engine_class.new(syntax: Dassets::Sass.SASS)
       assert_equal @factory.sass_compiled, sass_engine.compile(@factory.sass)
     end
   end
