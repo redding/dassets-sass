@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "assert"
 require "dassets-sass"
 
@@ -7,9 +9,9 @@ require "sassc"
 module Dassets::Sass
   class UnitTests < Assert::Context
     desc "Dassets::Sass"
-    subject { unit_class }
+    subject{ unit_class }
 
-    let(:unit_class) { Dassets::Sass }
+    let(:unit_class){ Dassets::Sass }
 
     should "know its CONSTANTS" do
       assert_that(unit_class.SASS).equals("sass")
@@ -23,14 +25,14 @@ module Dassets::Sass
 
   class EngineTests < UnitTests
     desc "Engine"
-    subject { engine_class }
+    subject{ engine_class }
 
-    let(:engine_class) { unit_class::Engine }
+    let(:engine_class){ unit_class::Engine }
   end
 
   class EngineInitTests < EngineTests
     desc "when init"
-    subject { engine_class.new }
+    subject{ engine_class.new }
 
     setup do
       @lp1 = "/a-load-path-1"
@@ -61,7 +63,8 @@ module Dassets::Sass
       assert_that(engine.output_style).equals(Dassets::Sass.COMPRESSED)
     end
 
-    should "allow specifying custom load paths, always including the source path" do
+    should "allow specifying custom load paths, always including the "\
+           "source path" do
       engine = engine_class.new(load_paths: @lp1)
       assert_that(engine.load_paths).includes(@lp1)
       assert_that(engine.load_paths).includes(subject.opts["source_path"])

@@ -33,29 +33,29 @@ end
 class Dassets::Sass::Engine < Dassets::Engine
   def syntax
     (
-      self.opts[:syntax] ||
-      self.opts["syntax"] ||
+      opts[:syntax] ||
+      opts["syntax"] ||
       Dassets::Sass.SCSS
     ).to_s
   end
 
   def output_style
     (
-      self.opts[:output_style] ||
-      self.opts["output_style"] ||
+      opts[:output_style] ||
+      opts["output_style"] ||
       Dassets::Sass.NESTED
     ).to_s
   end
 
   def load_paths
     @load_paths ||=
-      (
-        [self.opts["source_path"]] +
-        [*(self.opts[:load_paths] || self.opts["load_paths"] || [])]
-      )
+      begin
+        [opts["source_path"]] +
+        [*(opts[:load_paths] || opts["load_paths"] || [])]
+      end
   end
 
-  def ext(input_ext)
+  def ext(_input_ext)
     "css"
   end
 
@@ -63,9 +63,9 @@ class Dassets::Sass::Engine < Dassets::Engine
     SassC::Engine
       .new(
         input_content,
-        syntax:     self.syntax.to_sym,
-        style:      self.output_style.to_sym,
-        load_paths: self.load_paths,
+        syntax:     syntax.to_sym,
+        style:      output_style.to_sym,
+        load_paths: load_paths,
       )
       .render
   end

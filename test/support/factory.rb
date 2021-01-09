@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 require "assert/factory"
 
 module Factory
   extend Assert::Factory
 
-  module_function
-
-  def scss
+  def self.scss
     "$blue: #3bbfce;\n"\
     "$margin: 16px;\n"\
     ".border {\n"\
@@ -15,7 +15,7 @@ module Factory
     "}\n"
   end
 
-  def scss_compiled
+  def self.scss_compiled
     ".border {\n"\
     "  padding: 8px;\n"\
     "  margin: 8px;\n"\
@@ -23,15 +23,14 @@ module Factory
     "}\n"
   end
 
-  def sass
+  def self.sass
     "table.hl\n"\
     "  margin: 2em 0\n"\
   end
 
-  def sass_compiled
+  def self.sass_compiled
     "table.hl {\n"\
     "  margin: 2em 0; "\
     "}\n"\
   end
-
 end
